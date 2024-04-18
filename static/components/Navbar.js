@@ -17,9 +17,25 @@ export default{
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>
+          <li class="nav-item text-end" v-if='is_login'>
+            <button class="nav-link" @click='logout'>Logout</button>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-  `
+  `,
+  data() {
+    return {
+        role: localStorage.getItem('role'),
+        is_login: localStorage.getItem('auth-token')
+    }
+  },
+  methods: {
+    logout() {
+        localStorage.removeItem('auth-token'),
+        localStorage.removeItem('role'),
+        this.$router.push('/login')
+    }
+  }
 }
