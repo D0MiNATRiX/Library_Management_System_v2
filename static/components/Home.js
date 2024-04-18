@@ -1,3 +1,23 @@
+import AdminHome from "./AdminHome.js"
+import LibrarianHome from "./LibrarianHome.js"
+import StudentHome from "./StudentHome.js"
+
 export default{
-    template: `<div>Welcome Home</div>`,
+    template: `
+    <div>
+        <AdminHome v-if="userRole=='admin'" />
+        <LibrarianHome v-if="userRole=='librarian'" />
+        <StudentHome v-if="userRole=='student'" />
+    </div>
+    `,
+    data() {
+        return {
+            userRole: this.$route.query.role,
+        }
+    },
+    components: {
+        AdminHome,
+        LibrarianHome,
+        StudentHome
+    },
 }
