@@ -11,11 +11,8 @@ export default{
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+          <li class="nav-item" v-if="role=='admin'">
+            <a class="nav-link" href="#">Users</a>
           </li>
           <li class="nav-item text-end" v-if='is_login'>
             <button class="nav-link" @click='logout'>Logout</button>

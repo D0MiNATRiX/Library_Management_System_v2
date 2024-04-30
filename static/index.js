@@ -11,7 +11,7 @@ new Vue({
     el: '#app',
     template: `<div>
                 <Navbar />
-                <router-view />
+                <router-view class="m-3"/>
                </div>`,
     router,
     components: {
