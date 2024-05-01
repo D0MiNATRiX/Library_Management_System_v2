@@ -1,4 +1,5 @@
 from flask_restful import Resource, Api, reqparse, marshal_with, fields
+from flask_security import auth_required, roles_required
 from .models import Book, db
 
 api = Api(prefix='/api')
@@ -21,13 +22,16 @@ book_fields = {
 
 class Books(Resource):
     @marshal_with(book_fields)
+    @auth_required("token")
     def get(self):
         all_book_fields = Book.query.all()
         return all_book_fields
     
+    @auth_required("token")
+    @roles_required("librarian")
     def post(self):
         args = parser.parse_args()
-        book = Book(**args)
+        book = Book(name=args.get("name"), content=args.get("content"), author=args.get("author"), date_issued=args.get("date_issued"), return_date=args.get("return_date"))
         db.session.add(book)
         db.session.commit()
         return {"message": "Book Created"}

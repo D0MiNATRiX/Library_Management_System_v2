@@ -9,10 +9,10 @@ export default{
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link class="nav-link active" aria-current="page" to="/">Home</a>
           </li>
           <li class="nav-item" v-if="role=='admin'">
-            <a class="nav-link" href="#">Users</a>
+            <router-link class="nav-link" to="/users">Users</a>
           </li>
           <li class="nav-item text-end" v-if='is_login'>
             <button class="nav-link" @click='logout'>Logout</button>

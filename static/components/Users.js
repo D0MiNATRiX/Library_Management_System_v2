@@ -4,7 +4,7 @@ export default {
         <div v-if="error">{{error}}</div>
         <div v-for="(user, index) in allUsers">
         {{user.email}}
-        <button class="btn btn-primary" v-if="!user.active">Approve</button>
+        <button class="btn btn-primary" v-if="!user.active" @click="approve()">Approve</button>
         </div>
     </div>
     `,
@@ -15,6 +15,19 @@ export default {
             error: null
         }
     },
+    methods: {
+        async approve() {
+            const res = await fetch("activate/librarian", {
+                headers: {
+                    'Authentication-Token': this.token
+                }
+            })
+            const data = await res.json()
+            if (res.ok) {
+                alert(data.message)
+            }
+        }
+    }, 
     async mounted() {
         const res = await fetch('/users', {
             headers: {
